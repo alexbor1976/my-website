@@ -62,9 +62,15 @@ $(document).ready(function() {
     // Tell it to render!
     myMenu.render();
 
-    // Your other jQuery code stays here, nice and clean
-    $('#clickMeBtn').click(function() {
-        alert("jQuery is working locally!");
+    // ---------------------------------------------------------
+    // 3D Page Interactions
+    // ---------------------------------------------------------
+    
+    // Listen for a click on the model1 button
+    $('#model1-btn').click(function() {
+        // Toggle the 'd-none' class on both images inside this specific button
+        $(this).find('.switch-off').toggleClass('d-none');
+        $(this).find('.switch-on').toggleClass('d-none');
     });
 
 });

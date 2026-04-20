@@ -51,6 +51,22 @@ class MenuBuilder {
     }
 }
 
+function buttons3DInteraction(){
+    // Listen for a click on the model1 button
+    $('#model1-btn').click(function() {
+        // Toggle the 'd-none' class on both images inside this specific button
+        $(this).find('.switch-off').toggleClass('d-none');
+        $(this).find('.switch-on').toggleClass('d-none');
+    });
+
+    // Listen for a click on the model1 button
+    $('#model3-btn').click(function() {
+        // Toggle the 'd-none' class on both images inside this specific button
+        $(this).find('.switch-off').toggleClass('d-none');
+        $(this).find('.switch-on').toggleClass('d-none');
+    });
+}
+
 // ---------------------------------------------------------
 // 2. Main Execution (This runs when the page loads)
 // ---------------------------------------------------------
@@ -65,12 +81,6 @@ $(document).ready(function() {
     // ---------------------------------------------------------
     // 3D Page Interactions
     // ---------------------------------------------------------
-    
-    // Listen for a click on the model1 button
-    $('#model1-btn').click(function() {
-        // Toggle the 'd-none' class on both images inside this specific button
-        $(this).find('.switch-off').toggleClass('d-none');
-        $(this).find('.switch-on').toggleClass('d-none');
-    });
+    buttons3DInteraction();
 
 });

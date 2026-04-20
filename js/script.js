@@ -1,4 +1,4 @@
-// 1. Define the class OUTSIDE of $(document).ready
+// the class of the MENU
 class MenuBuilder {
     // The constructor runs when we create a new instance of this class
     constructor(placeholderSelector) {

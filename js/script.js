@@ -51,23 +51,77 @@ class MenuBuilder {
     }
 }
 
-function buttons3DInteraction(){
+class PowerIndicatorStick {
+    constructor(css_img_id) {
+        //css id of the img to rotate
+        this.css_img_id = css_img_id;
+    }
+
+    run(){
+        this.startSmoothOscillatingRotation();
+    }
+
+    /**
+   * Starts continuous rotation within a ±30-degree range in small increments.
+   */
+    startSmoothOscillatingRotation() {
+        let angle = 0;
+        let increment = 1; // Small step increment
+
+        this.oscillationIntervalId = setInterval(() => {
+            angle += increment;
+            this.rotateStick(angle);
+
+            // Reverse direction when reaching ±30 degrees
+            if (angle >= 35 || angle <= -35) {
+                increment = -increment;
+            }
+        }, 20); // Adjust interval time for smoothness (20ms for a smooth transition)
+    }
+
+    /**
+     * Stops the smooth oscillating rotation.
+     */
+    stopSmoothOscillatingRotation() {
+        if (this.oscillationIntervalId) {
+            clearInterval(this.oscillationIntervalId);
+            this.oscillationIntervalId = null;
+        }
+    }
+
+    /**
+     * Rotates the stick to a specific angle.
+     * @param {number} angle The angle to set the rotation within ±30 degrees.
+     */
+    rotateStick(angle) {
+        this.currentRotation = angle;
+        const stickElement = document.getElementById(this.css_img_id);
+        if (stickElement) {
+            // Adjust the rotation center to be slightly down (e.g., center and 70% down vertically)
+            stickElement.style.transformOrigin = '48.5% 79%'; // Adjust these values as needed
+            stickElement.style.transform = `rotate(${this.currentRotation}deg)`;
+        }
+    }
+
+}
+
+function buttons3DInteraction() {
     // Listen for a click on the model3 button
-    $('#model1-btn').click(function() {
+    $('#model1-btn').click(function () {
         // Toggle the 'd-none' class on both images inside this specific button
         $(this).find('.switch-off').toggleClass('d-none');
         $(this).find('.switch-on').toggleClass('d-none');
     });
 
     // Listen for a click on the model1 button
-    $('#model3-btn').click(function() {
+    $('#model3-btn').click(function () {
         // Toggle the 'd-none' class on both images inside this specific button
         $(this).find('.switch-off').toggleClass('d-none');
         $(this).find('.switch-on').toggleClass('d-none');
     });
 
     // Listen for a click on the steel button
-    $('#model_steel-btn').click(function() {
+    $('#model_steel-btn').click(function () {
         // Toggle the 'd-none' class on both images inside this specific button
         $(this).find('.switch-off').toggleClass('d-none');
         $(this).find('.switch-on').toggleClass('d-none');
@@ -77,11 +131,12 @@ function buttons3DInteraction(){
 // ---------------------------------------------------------
 // 2. Main Execution (This runs when the page loads)
 // ---------------------------------------------------------
-$(document).ready(function() {
-    
+const powerIndicatorStick = new PowerIndicatorStick('PowerIndicatorStick_id');
+
+$(document).ready(function () {
     // Create a new instance of our class and tell it where to inject the menu
     const myMenu = new MenuBuilder('#header-placeholder');
-    
+
     // Tell it to render!
     myMenu.render();
 
@@ -89,5 +144,5 @@ $(document).ready(function() {
     // 3D Page Interactions
     // ---------------------------------------------------------
     buttons3DInteraction();
-
+    powerIndicatorStick.run();
 });

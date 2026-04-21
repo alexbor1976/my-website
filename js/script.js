@@ -55,6 +55,7 @@ class PowerIndicatorStick {
     constructor(css_img_id) {
         //css id of the img to rotate
         this.css_img_id = css_img_id;
+        this.$stickElement = $(`#${this.css_img_id}`);
     }
 
     run(){
@@ -79,29 +80,44 @@ class PowerIndicatorStick {
         }, 20); // Adjust interval time for smoothness (20ms for a smooth transition)
     }
 
-    /**
-     * Stops the smooth oscillating rotation.
-     */
-    stopSmoothOscillatingRotation() {
-        if (this.oscillationIntervalId) {
-            clearInterval(this.oscillationIntervalId);
-            this.oscillationIntervalId = null;
-        }
-    }
+    // /**
+    //  * Stops the smooth oscillating rotation.
+    //  */
+    // stopSmoothOscillatingRotation() {
+    //     if (this.oscillationIntervalId) {
+    //         clearInterval(this.oscillationIntervalId);
+    //         this.oscillationIntervalId = null;
+    //     }
+    // }
 
     /**
      * Rotates the stick to a specific angle.
      * @param {number} angle The angle to set the rotation within ±30 degrees.
      */
+    // rotateStick(angle) {
+    //     this.currentRotation = angle;
+    //     const stickElement = document.getElementById(this.css_img_id);
+    //     if (stickElement) {
+    //         // Adjust the rotation center to be slightly down (e.g., center and 70% down vertically)
+    //         stickElement.style.transformOrigin = '48.5% 79%'; // Adjust these values as needed
+    //         stickElement.style.transform = `rotate(${this.currentRotation}deg)`;
+    //     }
+    // }
+
     rotateStick(angle) {
-        this.currentRotation = angle;
-        const stickElement = document.getElementById(this.css_img_id);
-        if (stickElement) {
-            // Adjust the rotation center to be slightly down (e.g., center and 70% down vertically)
-            stickElement.style.transformOrigin = '48.5% 79%'; // Adjust these values as needed
-            stickElement.style.transform = `rotate(${this.currentRotation}deg)`;
-        }
+    // this.currentRotation = angle;
+    // Select the element using jQuery's ID selector (#)
+    // const $stickElement = $(`#${this.css_img_id}`);
+    
+    // .length checks if the element actually exists on the page
+    if (this.$stickElement.length) {
+        // Apply multiple CSS properties at once using an object
+        this.$stickElement.css({
+            'transform-origin': '48.5% 79%',
+            'transform': `rotate(${angle}deg)`
+        });
     }
+}
 
 }
 

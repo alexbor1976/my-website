@@ -131,7 +131,7 @@ class RadarDisplay {
 
         // Make sure the canvas resolution matches its display size
         this.resizeCanvas();
-        
+
         // If the user resizes the browser window, redraw the canvas to fix distortion
         $(window).resize(() => this.resizeCanvas());
     }
@@ -148,9 +148,9 @@ class RadarDisplay {
         const height = this.canvas.height;
         const centerX = width / 2;
         const centerY = height / 2;
-        
+
         // Make the line length 45% of the width so it stays inside the circle
-        const radius = Math.min(centerX, centerY) * 0.80; 
+        const radius = Math.min(centerX, centerY) * 0.80;
 
         // 1. Clear the old frame
         this.ctx.clearRect(0, 0, width, height);
@@ -169,9 +169,9 @@ class RadarDisplay {
         this.ctx.beginPath();
         this.ctx.moveTo(0, 0); // Start at the center
         this.ctx.lineTo(radius, 0); // Draw outwards
-        
+
         // 6. Style the line (Classic radar green with a glow effect)
-        this.ctx.strokeStyle = '#00FF00'; 
+        this.ctx.strokeStyle = '#00FF00';
         this.ctx.lineWidth = 1;
         this.ctx.shadowBlur = 10;
         this.ctx.shadowColor = '#00FF00';
@@ -207,7 +207,6 @@ class RadarDisplay {
     }
 }
 
-
 function buttons3DInteraction() {
     // Listen for a click on the model3 button
     $('#model1-btn').click(function () {
@@ -231,12 +230,76 @@ function buttons3DInteraction() {
     });
 }
 
+// the draggable stick
+class DraggableKnob {
+    constructor(containerId) {
+        this.container = document.getElementById(containerId);
+        this.stick = this.container.querySelector('img');
+
+        this.isDragging = false;
+        this.currentAngle = 0;
+
+        // NEW: We need to remember where the mouse was a millisecond ago
+        this.previousX = 0;
+
+        // NEW: Adjust this number to make it spin faster or slower!
+        this.sensitivity = 1.5;
+
+        this.initEvents();
+    }
+
+    initEvents() {
+        this.stick.ondragstart = () => false;
+        this.container.ondragstart = () => false;
+
+        // 1. POINTER DOWN
+        this.container.addEventListener('pointerdown', (e) => {
+            this.isDragging = true;
+            this.container.classList.add('dragging');
+
+            // Record the exact X position where the user clicked
+            this.previousX = e.clientX;
+
+            this.container.setPointerCapture(e.pointerId);
+        });
+
+        // 2. POINTER MOVE
+        document.addEventListener('pointermove', (e) => {
+            if (!this.isDragging) return;
+
+            // Calculate the "Delta" (how far the mouse moved left or right since the last frame)
+            const deltaX = e.clientX - this.previousX;
+
+            // Add that movement to our angle, multiplied by our speed sensitivity
+            this.currentAngle += deltaX * this.sensitivity;
+
+            // Rotate the image
+            this.stick.style.transform = `rotate(${this.currentAngle}deg)`;
+
+            // IMPORTANT: Update the previous position so the next frame calculates correctly
+            this.previousX = e.clientX;
+        });
+
+        // 3. POINTER UP / CANCEL
+        const onPointerUp = (e) => {
+            if (this.isDragging) {
+                this.isDragging = false;
+                this.container.classList.remove('dragging');
+
+                try {
+                    this.container.releasePointerCapture(e.pointerId);
+                } catch (err) { }
+            }
+        };
+
+        document.addEventListener('pointerup', onPointerUp);
+        document.addEventListener('pointercancel', onPointerUp);
+    }
+}
+
 // ---------------------------------------------------------
 // 2. Main Execution (This runs when the page loads)
 // ---------------------------------------------------------
-const powerIndicatorStick = new PowerIndicatorStick('PowerIndicatorStick_id', 'PowerIndicatorDial_id');
-const myRadar = new RadarDisplay('ppi_id', 'ppi-canvas');
-
 $(document).ready(function () {
     // Create a new instance of our class and tell it where to inject the menu
     const myMenu = new MenuBuilder('#header-placeholder');
@@ -248,6 +311,10 @@ $(document).ready(function () {
     // 3D Page Interactions
     // ---------------------------------------------------------
     buttons3DInteraction();
+    const powerIndicatorStick = new PowerIndicatorStick('PowerIndicatorStick_id', 'PowerIndicatorDial_id');
+    const myRadar = new RadarDisplay('ppi_id', 'ppi-canvas');
+    const azimuthKnob = new DraggableKnob('azimuth-btn');
+
     powerIndicatorStick.run();
     myRadar.startSweep(1);
 });

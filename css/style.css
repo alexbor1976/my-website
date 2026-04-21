@@ -1,8 +1,9 @@
 /* 1. The container acts as the anchor point */
 .ppi-container {
     position: relative;
-    display: inline-block; /* Keeps the container tightly wrapped around the image */
-    width: 100%; 
+    display: inline-block;
+    /* Keeps the container tightly wrapped around the image */
+    width: 100%;
 }
 
 /* 2. The background image */
@@ -20,5 +21,27 @@
     width: 100%;
     height: 100%;
     /* This allows mouse clicks to pass right through the canvas if you need to click the image below */
-    pointer-events: none; 
+    pointer-events: none;
 }
+/* 1. The container acts as the anchor point */
+
+
+/* 2. The rotator */
+/* Застосовуємо до самого контейнера, а не до зображення */
+#model1-btn {
+    touch-action: none; 
+    cursor: grab;
+    display: inline-block; 
+}
+
+#model1-btn img {
+    transform-origin: 50% 50%; 
+    user-select: none; 
+    -webkit-user-drag: none;
+    /* REMOVED pointer-events: none; from here! */
+}
+
+#model1-btn.dragging {
+    cursor: grabbing !important;
+}
+/* 2. The rotator */

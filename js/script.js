@@ -52,13 +52,23 @@ class MenuBuilder {
 }
 
 class PowerIndicatorStick {
-    constructor(css_img_id) {
+    constructor(css_img_id, css_dial_id) {
         //css id of the img to rotate
-        this.css_img_id = css_img_id;
-        this.$stickElement = $(`#${this.css_img_id}`);
+        this.$stickElement = $(`#${css_img_id}`);
+        this.$dialElement = $(`#${css_dial_id}`);
+        this.start = true;
+
+        // Add the click listener
+        this.$dialElement.click(() => {
+            this.switchAnimation();
+        });
     }
 
-    run(){
+    switchAnimation() {
+        this.start = !this.start;
+    }
+
+    run() {
         this.startSmoothOscillatingRotation();
     }
 
@@ -70,7 +80,11 @@ class PowerIndicatorStick {
         let increment = 1; // Small step increment
 
         this.oscillationIntervalId = setInterval(() => {
-            angle += increment;
+            if (this.start) {
+                //inr the angle only if the rotation is enabled
+                angle += increment;
+            }
+
             this.rotateStick(angle);
 
             // Reverse direction when reaching ±30 degrees
@@ -80,44 +94,30 @@ class PowerIndicatorStick {
         }, 20); // Adjust interval time for smoothness (20ms for a smooth transition)
     }
 
-    // /**
-    //  * Stops the smooth oscillating rotation.
-    //  */
-    // stopSmoothOscillatingRotation() {
-    //     if (this.oscillationIntervalId) {
-    //         clearInterval(this.oscillationIntervalId);
-    //         this.oscillationIntervalId = null;
-    //     }
-    // }
+    /**
+     * Stops the smooth oscillating rotation.
+     */
+    stopSmoothOscillatingRotation() {
+        if (this.oscillationIntervalId) {
+            clearInterval(this.oscillationIntervalId);
+            this.oscillationIntervalId = null;
+        }
+    }
 
     /**
      * Rotates the stick to a specific angle.
      * @param {number} angle The angle to set the rotation within ±30 degrees.
      */
-    // rotateStick(angle) {
-    //     this.currentRotation = angle;
-    //     const stickElement = document.getElementById(this.css_img_id);
-    //     if (stickElement) {
-    //         // Adjust the rotation center to be slightly down (e.g., center and 70% down vertically)
-    //         stickElement.style.transformOrigin = '48.5% 79%'; // Adjust these values as needed
-    //         stickElement.style.transform = `rotate(${this.currentRotation}deg)`;
-    //     }
-    // }
-
     rotateStick(angle) {
-    // this.currentRotation = angle;
-    // Select the element using jQuery's ID selector (#)
-    // const $stickElement = $(`#${this.css_img_id}`);
-    
-    // .length checks if the element actually exists on the page
-    if (this.$stickElement.length) {
-        // Apply multiple CSS properties at once using an object
-        this.$stickElement.css({
-            'transform-origin': '48.5% 79%',
-            'transform': `rotate(${angle}deg)`
-        });
+        // .length checks if the element actually exists on the page
+        if (this.$stickElement.length) {
+            // Apply multiple CSS properties at once using an object
+            this.$stickElement.css({
+                'transform-origin': '50% 90%',
+                'transform': `rotate(${angle}deg)`
+            });
+        }
     }
-}
 
 }
 
@@ -147,7 +147,7 @@ function buttons3DInteraction() {
 // ---------------------------------------------------------
 // 2. Main Execution (This runs when the page loads)
 // ---------------------------------------------------------
-const powerIndicatorStick = new PowerIndicatorStick('PowerIndicatorStick_id');
+const powerIndicatorStick = new PowerIndicatorStick('PowerIndicatorStick_id', 'PowerIndicatorDial_id');
 
 $(document).ready(function () {
     // Create a new instance of our class and tell it where to inject the menu

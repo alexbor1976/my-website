@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,12 +8,13 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
     <div id="header-placeholder"></div>
 
     <div class="container mt-5">
         <h1 class="mb-5 text-center">Зразки розроблених мною 3D-моделей</h1>
-        
+
         <!-- Інтерактивний перемикач, Triple -->
         <div class="border rounded p-4 shadow-sm mb-5">
             <div class="row align-items-center justify-content-center">
@@ -23,8 +25,9 @@
                     </button>
 
                     <p class="mt-2 mb-0 fw-bold text-secondary">Інтерактивний перемикач</p>
+                    <p class="mb-0 text-secondary">(натисніть для перемикання)</p>
                 </div>
-                
+
                 <div class="col-12 col-md-6 text-center">
                     <img src="img/triple_switch_3d_model.png" alt="3D Model 1" class="img-fluid rounded shadow-sm">
 
@@ -44,12 +47,13 @@
                     <div id='PowerIndicatorDial_id' style="position:relative;width:320px;height:320px;margin:auto">
                         <img src="img/power_indicator_bottom.png" class="w-100 h-100"></img>
 
-                        <img id='PowerIndicatorStick_id' src="img/power_indicator_stick.png" style="position: absolute;top:24%;left:46%;">
+                        <img id='PowerIndicatorStick_id' src="img/power_indicator_stick.png"
+                            style="position: absolute;top:24%;left:46%;">
                     </div>
 
                     <p class="mt-2 mb-0 fw-bold text-secondary">Індикатор рівня сигналу</p>
                 </div>
-                
+
                 <div class="col-12 col-md-6 text-center">
                     <img src="img/power_indicator_3d_model.png" alt="3D Model 1" class="img-fluid rounded shadow-sm">
 
@@ -57,7 +61,7 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Інтерактивний перемикач, Steel -->
         <div class="border rounded p-4 shadow-sm mb-5">
             <div class="row align-items-center justify-content-center">
@@ -68,8 +72,9 @@
                     </button>
 
                     <p class="mt-2 mb-0 fw-bold text-secondary">Інтерактивний перемикач</p>
+                    <p class="mb-0 text-secondary">(натисніть для перемикання)</p>
                 </div>
-                
+
                 <div class="col-12 col-md-6 text-center">
                     <img src="img/steel_switch_3d_model.png" alt="3D Model 1" class="img-fluid rounded shadow-sm">
 
@@ -82,13 +87,15 @@
         <div class="border rounded p-4 shadow-sm mb-5">
             <div class="row align-items-center justify-content-center">
                 <div class="col-12 col-md-6 text-center mb-3 mb-md-0">
-                    <button class="btn p-0 border-0 custom-image-btn" id="ppi_id">
-                        <img src="img/osc.png" alt="Switch Off" class="img-fluid">
-                    </button>
+                    <div class="p-0 border-0 ppi-container" id="ppi_id">
+                        <img src="img/osc.png" alt="PPI Screen" class="img-fluid ppi-bg">
+
+                        <canvas id="ppi-canvas" class="ppi-canvas"></canvas>
+                    </div>
 
                     <p class="mt-2 mb-0 fw-bold text-secondary">Екран кругового огляду</p>
                 </div>
-                
+
                 <div class="col-12 col-md-6 text-center">
                     <img src="img/osc_3d.png" alt="3D Model 1" class="img-fluid rounded shadow-sm">
 
@@ -108,8 +115,9 @@
                     </button>
 
                     <p class="mt-2 mb-0 fw-bold text-secondary">Інтерактивний перемикач</p>
+                    <p class="mb-0 text-secondary">(натисніть для перемикання)</p>
                 </div>
-                
+
                 <div class="col-12 col-md-6 text-center">
                     <img src="img/single_switch_3d_model.png" alt="3D Model 1" class="img-fluid rounded shadow-sm">
 
@@ -118,7 +126,7 @@
             </div>
         </div>
 
-        
+
     </div>
 
 
@@ -126,4 +134,5 @@
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/script.js"></script>
 </body>
+
 </html>

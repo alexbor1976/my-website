@@ -1,0 +1,24 @@
+/* 1. The container acts as the anchor point */
+.ppi-container {
+    position: relative;
+    display: inline-block; /* Keeps the container tightly wrapped around the image */
+    width: 100%; 
+}
+
+/* 2. The background image */
+.ppi-bg {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+/* 3. The canvas is stretched to perfectly cover the container */
+.ppi-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* This allows mouse clicks to pass right through the canvas if you need to click the image below */
+    pointer-events: none; 
+}

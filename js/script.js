@@ -121,6 +121,93 @@ class PowerIndicatorStick {
 
 }
 
+class RadarDisplay {
+    constructor(containerId, canvasId) {
+        this.$container = $(`#${containerId}`);
+        this.canvas = document.getElementById(canvasId);
+        this.ctx = this.canvas.getContext('2d');
+        this.angle = 0; // Starting azimuth angle
+        this.animationId = null;
+
+        // Make sure the canvas resolution matches its display size
+        this.resizeCanvas();
+        
+        // If the user resizes the browser window, redraw the canvas to fix distortion
+        $(window).resize(() => this.resizeCanvas());
+    }
+
+    resizeCanvas() {
+        // Match the internal canvas pixels to the actual visual size of the Bootstrap column
+        this.canvas.width = this.$container.width();
+        this.canvas.height = this.$container.height();
+        this.draw();
+    }
+
+    draw() {
+        const width = this.canvas.width;
+        const height = this.canvas.height;
+        const centerX = width / 2;
+        const centerY = height / 2;
+        
+        // Make the line length 45% of the width so it stays inside the circle
+        const radius = Math.min(centerX, centerY) * 0.80; 
+
+        // 1. Clear the old frame
+        this.ctx.clearRect(0, 0, width, height);
+
+        // 2. Save the blank state
+        this.ctx.save();
+
+        // 3. Move our drawing origin to the exact center of the image
+        this.ctx.translate(centerX, centerY);
+
+        // 4. Rotate the canvas. (We subtract 90 degrees so 0 points UP)
+        const radians = (this.angle - 90) * (Math.PI / 180);
+        this.ctx.rotate(radians);
+
+        // 5. Draw the radar line
+        this.ctx.beginPath();
+        this.ctx.moveTo(0, 0); // Start at the center
+        this.ctx.lineTo(radius, 0); // Draw outwards
+        
+        // 6. Style the line (Classic radar green with a glow effect)
+        this.ctx.strokeStyle = '#00FF00'; 
+        this.ctx.lineWidth = 1;
+        this.ctx.shadowBlur = 10;
+        this.ctx.shadowColor = '#00FF00';
+        this.ctx.stroke();
+
+        // 7. Restore the state for the next frame
+        this.ctx.restore();
+    }
+
+    // Call this manually to set a specific angle
+    setAngle(newAngle) {
+        this.angle = newAngle;
+        this.draw();
+    }
+
+    // Call this to make it spin endlessly
+    startSweep(speed = 1) {
+        const animate = () => {
+            this.angle += speed;
+            if (this.angle >= 360) this.angle = 0; // Reset after a full circle
+            this.draw();
+            // requestAnimationFrame is the smoothest way to animate in JS
+            this.animationId = requestAnimationFrame(animate);
+        };
+        animate();
+    }
+
+    // Call this to pause the spinning
+    stopSweep() {
+        if (this.animationId) {
+            cancelAnimationFrame(this.animationId);
+        }
+    }
+}
+
+
 function buttons3DInteraction() {
     // Listen for a click on the model3 button
     $('#model1-btn').click(function () {
@@ -148,6 +235,7 @@ function buttons3DInteraction() {
 // 2. Main Execution (This runs when the page loads)
 // ---------------------------------------------------------
 const powerIndicatorStick = new PowerIndicatorStick('PowerIndicatorStick_id', 'PowerIndicatorDial_id');
+const myRadar = new RadarDisplay('ppi_id', 'ppi-canvas');
 
 $(document).ready(function () {
     // Create a new instance of our class and tell it where to inject the menu
@@ -161,4 +249,5 @@ $(document).ready(function () {
     // ---------------------------------------------------------
     buttons3DInteraction();
     powerIndicatorStick.run();
+    myRadar.startSweep(1);
 });

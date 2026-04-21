@@ -52,7 +52,7 @@ class MenuBuilder {
 }
 
 function buttons3DInteraction(){
-    // Listen for a click on the model1 button
+    // Listen for a click on the model3 button
     $('#model1-btn').click(function() {
         // Toggle the 'd-none' class on both images inside this specific button
         $(this).find('.switch-off').toggleClass('d-none');
@@ -61,6 +61,13 @@ function buttons3DInteraction(){
 
     // Listen for a click on the model1 button
     $('#model3-btn').click(function() {
+        // Toggle the 'd-none' class on both images inside this specific button
+        $(this).find('.switch-off').toggleClass('d-none');
+        $(this).find('.switch-on').toggleClass('d-none');
+    });
+
+    // Listen for a click on the steel button
+    $('#model_steel-btn').click(function() {
         // Toggle the 'd-none' class on both images inside this specific button
         $(this).find('.switch-off').toggleClass('d-none');
         $(this).find('.switch-on').toggleClass('d-none');

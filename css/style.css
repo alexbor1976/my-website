@@ -45,3 +45,16 @@
     cursor: grabbing !important;
 }
 /* 2. The rotator */
+
+
+/* Smoothly scales the image up and enhances the shadow on hover */
+.hover-zoom {
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    /* Optional: changes cursor so the user knows they are interacting with it */
+    cursor: crosshair; 
+}
+
+.hover-zoom:hover {
+    transform: scale(1.05); /* Increases size by 5% */
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2) !important; /* Deepens the shadow */
+}

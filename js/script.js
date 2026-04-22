@@ -364,22 +364,25 @@ class SoundController {
 $(document).ready(function () {
     // Create a new instance of our class and tell it where to inject the menu
     const myMenu = new MenuBuilder('#header-placeholder');
-
-    // Tell it to render!
     myMenu.render();
 
-    // ---------------------------------------------------------
-    // 3D Page Interactions
-    // ---------------------------------------------------------
-    buttons3DInteraction();
-    const powerIndicatorStick = new PowerIndicatorStick('PowerIndicatorStick_id', 'PowerIndicatorDial_id');
-    const myRadar = new RadarDisplay('ppi_id', 'ppi-canvas');
-    const azimuthKnob = new DraggableKnob('azimuth-btn');
-    const clickAudio = new SoundController();
-
-    powerIndicatorStick.run();
-    myRadar.startSweep(1);
-    $('.custom-image-btn').on('pointerdown', function() {
-        clickAudio.play();
-    });
+    // 2. 3D WIDGETS: Only run these if we are actually on the 3D page!
+    // We check if the canvas exists. If length > 0, it means we found it.
+    if ($('#ppi-canvas').length > 0) {
+        
+        buttons3DInteraction();
+        
+        const powerIndicatorStick = new PowerIndicatorStick('PowerIndicatorStick_id', 'PowerIndicatorDial_id');
+        powerIndicatorStick.run();
+        
+        const myRadar = new RadarDisplay('ppi_id', 'ppi-canvas');
+        myRadar.startSweep(1);
+        
+        const azimuthKnob = new DraggableKnob('azimuth-btn');
+        
+        const clickAudio = new SoundController();
+        $('.custom-image-btn').on('pointerdown', function() {
+            clickAudio.play();
+        });
+    }
 });

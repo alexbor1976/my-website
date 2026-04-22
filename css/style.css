@@ -74,3 +74,15 @@
 .hover-zoom img {
     cursor: crosshair;
 }
+
+/* Change the hamburger menu bars to Bootstrap's Primary Blue */
+.navbar-dark .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%230d6efd' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2.5' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+}
+
+/* Make the border of the toggle button match the blue bars */
+.navbar-dark .navbar-toggler {
+    border-color: #0d6efd !important;
+    /* Optional: adds a subtle blue glow when clicked */
+    box-shadow: 0 0 10px rgba(13, 110, 253, 0.25); 
+}

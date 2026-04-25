@@ -21,7 +21,9 @@ class MenuBuilder {
                         <li class="nav-item ms-3 my-0 py-1 py-lg-0">
                             <a href="3d.html" class="btn btn-primary fs-4 custom-mobile-btn">Зразки 3D-моделей</a>
                         </li>
-                        
+                        <li class="nav-item ms-3 my-0 py-1 py-lg-0">
+                            <a href="TO/TDECC_TO_start.html" target="_blank" class="btn btn-primary fs-4 custom-mobile-btn">Модель </a>
+                        </li>
                     </ul>
                 </div>
             </div>

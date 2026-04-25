@@ -1,0 +1,8 @@
+.switch-component {
+  position: absolute;
+  background-color: transparent; // No background color as default
+  cursor: pointer;
+  transition: background-image 0.3s ease;
+  background-size: cover;
+  background-position: center;
+}

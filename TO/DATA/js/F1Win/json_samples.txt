@@ -1,0 +1,1 @@
+{ "name": "ExampleName", "list": [{ "name": "Item1", "params": "paramValue1" }, { "name": "Item2", "params": "paramValue2" }] }

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TO</title>
+    <link rel="stylesheet" href="DATA/css/vendors/bootstrap.min.css">
+    <link rel="stylesheet" href="DATA/css/styles.css">
+</head>
+
+<body>
+    <div id="f1_window_id"></div>
+
+    <div id="zoom-pan-container">
+        <div id="zoom-pan-content">
+            <div id="main_id" class="d-flex flex-column ">
+                <!-- <div id="block_to_panel_id" class="cpanel d-inline-block align-self-end"></div> -->
+                <div class="d-flex flex-row">
+                    <div id="block_to_panel_id" class="cpanel d-inline-block align-self-end"></div>
+
+                    <!-- New large block on the right -->
+                    <!-- <div id="powerBlockId" class="large-panel"> -->
+                        <!-- <div id="powerBlockId" class="large-panel flex-grow-1"> -->
+                    <!-- </div> -->
+                </div>
+
+                <div class="cpanel d-flex align-self-end">
+                    <div id="block_to_state_panel_id" class="cpanel d-inline-block"></div>
+                    <!-- <div id="block_to_communication_device_id" class="cpanel d-inline-block"></div> -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ALL THE SCRIPTS ARE BEING ADDING BELOW -->
+    <!-- jquery, bootstrap, zooming, panning -->
+    <script src="DATA/js/vendors/jquery-3.7.1.min.js"></script>
+    <script src="DATA/js/vendors/jquery-ui.min.js"></script>
+    <script src="DATA/js/vendors/bootstrap.bundle.min.js"></script>
+    <script src="DATA/js/vendors/zoom_pan.js"></script>
+    <script src="DATA/js/Settings.js"></script>
+    <script src="DATA/js/Units/UnitsConverter.js"></script>
+
+    <!-- ELEMENTS OF BLOCKS -->
+    <script src="DATA/js/block_elements/Root.js"></script>
+    <script src="DATA/js/block_elements/MultiSwitch.js"></script>
+    <script src="DATA/js/block_elements/RotateButton.js"></script>
+    <script src="DATA/js/block_elements/ArmSafeTest.js"></script>
+    <script src="DATA/js/block_elements/ToModeSwitch.js"></script>
+    <script src="DATA/js/block_elements/TestTarget.js"></script>
+    <script src="DATA/js/block_elements/JoystickSign.js"></script>
+    <script src="DATA/js/block_elements/TrackDataLabel.js"></script>
+    <script src="DATA/js/block_elements/PPI.js"></script>
+    <script src="DATA/js/block_elements/PPI_TO.js"></script>
+    <script src="DATA/js/block_elements/HorizontalDrag.js"></script>
+    <script src="DATA/js/block_elements/AzimuthDrag.js"></script>
+    <script src="DATA/js/block_elements/Drag.js"></script>
+    <script src="DATA/js/block_elements/Joystick.js"></script>
+    <script src="DATA/js/block_elements/RangePPI.js"></script>
+    <script src="DATA/js/block_elements/TrackDataBtn.js"></script>
+    <script src="DATA/js/block_elements/TargetPackage2Ro.js"></script>
+    <script src="DATA/js/block_elements/PPITimeAzimuth.js"></script>
+    <script src="DATA/js/block_elements/PowerLamp.js"></script>
+    <script src="DATA/js/block_elements/PowerTripleSwitch.js"></script>
+    <script src="DATA/js/block_elements/PowerSingleSwitch.js"></script>
+    <script src="DATA/js/block_elements/SwitchSteel.js"></script>
+    <script src="DATA/js/block_elements/PowerIndicator.js"></script>
+    <script src="DATA/js/block_elements/PowerIndicatorStick.js"></script>
+
+    <!-- BLOCKS -->
+    <script src="DATA/js/BlockTOCommunicationDevice.js"></script>
+    <script src="DATA/js/BlockTOStatePanel.js"></script>
+    <script src="DATA/js/BlockTOPanel.js"></script>
+    <script src="DATA/js/ContextMenu.js"></script>
+    <script src="DATA/js/PowerBlock.js"></script>
+
+    <!-- THE F1 WINDOW -->
+    <script src="DATA/js/F1Win/Settings.js"></script>
+    <script src="DATA/js/F1Win/F1Tab.js"></script>
+    <script src="DATA/js/F1Win/F1TabChild.js"></script>
+    <script src="DATA/js/F1Win/F1Win.js"></script>
+    <script src="DATA/js/F1Win/main.js"></script>
+
+    <!-- THE MAIN STARTING POINT -->
+    <script src="DATA/js/Main.js"></script>
+</body>
+
+</html>
